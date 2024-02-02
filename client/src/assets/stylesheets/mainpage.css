@@ -1,0 +1,14 @@
+.serverList {
+  background-color: var(--primaryDark500);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 70px;
+}
+.serverIcon {
+  background-color: var(--primaryDark300);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+}
