@@ -1,0 +1,137 @@
+.form-container {
+  background-color: var(--blue);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-input-field {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  gap: 10px;
+}
+
+.required::after {
+  content: " *";
+  color: var(--red);
+}
+
+/* login form */
+
+.login-form-container {
+  background-color: var(--primaryDark400);
+  width: 60%;
+  border-radius: 10px;
+  padding: 30px;
+  color: var(--textDark300);
+}
+
+.login-form-container input {
+  background-color: var(--primaryDark500);
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  color: var(--textDark200);
+  outline: none;
+  font-size: 1.1rem;
+}
+
+.login-form-container span {
+  font-size: 14px;
+}
+
+.login-form-container button {
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.login-form-container button:hover {
+  cursor: pointer;
+  background-color: var(--blueDark);
+}
+
+.form-container a {
+  color: var(--linkBlue);
+  text-decoration: none;
+}
+
+.form-container a:hover {
+  text-decoration: underline;
+}
+
+.login-form-container {
+  display: flex;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  padding: 10px;
+}
+
+.login-form-headers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+
+.login-form-headers h2 {
+  margin: 0;
+  color: var(--textDark200);
+}
+
+.login-form-fields {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.identifier-login-field {
+  margin-bottom: 10px;
+}
+
+.login-form-register-span {
+  color: var(--textDark400);
+}
+
+.qr-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-container-placeholder {
+  width: 200px;
+  height: 200px;
+  border: 3px solid rgb(116, 115, 115);
+  border-radius: 10px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-container-headers {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.qr-container-headers h2 {
+  margin: 0;
+  color: var(--textDark200);
+}
