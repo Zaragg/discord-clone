@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import Message from "./Message";
-
+import MessageBox from "./MessageBox";
 //mayhaps this should in the future react(heh) on a message event triggered when a user sends msg
 //so we get the user info from the server
 //and pass it to this
@@ -14,6 +14,9 @@ export default function Chat() {
         time={date.toDateString()}
         text={"Hello this is a test."}
       />
+      <div className="message-box">
+        <MessageBox />
+      </div>
     </div>
   );
 }
