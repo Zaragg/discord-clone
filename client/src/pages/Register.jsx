@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Dropdown from "../components/Dropdown";
 import "boxicons";
 export default function Register() {
+  const [isMonthActive, setIsMonthActive] = useState(false);
+  const [isDayActive, setIsDayActive] = useState(false);
+  const [isYearActive, setIsYearActive] = useState(false);
+
   const [formData, setFormData] = useState({
     email: "",
     displayname: "",
@@ -58,31 +63,33 @@ export default function Register() {
                 <b>DATE OF BIRTH</b>
               </label>
               <div className="dob-register-container">
-                <div className="dob-register-box">
-                  Month{" "}
-                  <div className="chevron-container">
-                    <box-icon name="chevron-down" color="#949BA4"></box-icon>
-                  </div>
-                </div>
-                <div className="dob-register-box">
-                  Day{" "}
-                  <div className="chevron-container">
-                    <box-icon name="chevron-down" color="#949BA4"></box-icon>
-                  </div>
-                </div>
-                <div className="dob-register-box">
-                  Year{" "}
-                  <div className="chevron-container">
-                    <box-icon name="chevron-down" color="#949BA4"></box-icon>
-                  </div>
-                </div>
+                <Dropdown placeholder="Month" />
+
+                <Dropdown placeholder="Day" />
+
+                <Dropdown placeholder="Year" />
               </div>
             </div>
 
             <button onClick={handleSubmit}>Continue</button>
             <span id="register-form-policy-span">
               By registering, you agree to Discord's{" "}
-              <Link>Terms of Service</Link> and <Link>Privacy Policy</Link>.
+              <a
+                href="https://discord.com/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a
+                href="https://discord.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Privacy Policy
+              </a>
+              .
             </span>
 
             <span className="login-form-register-span">
