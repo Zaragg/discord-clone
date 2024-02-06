@@ -12,6 +12,7 @@ export default function Dropdown({ placeholder, items }) {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
           setIsActive(false);
+          console.log('hi')
         }
       }
       document.addEventListener("mousedown", handleClickOutside);
@@ -63,7 +64,7 @@ export default function Dropdown({ placeholder, items }) {
       </div>
 
       <div className="dropdown-button" onClick={(e) => setIsActive(!isActive)}>
-        {selected}
+        <input placeholder={selected}/>
         <span className="dropdown-chevron">
           {isActive ? (
             <box-icon name="chevron-up" color="#8f8e8e" size="20px"></box-icon>

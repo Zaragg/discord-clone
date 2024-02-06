@@ -74,22 +74,8 @@ export default function Register() {
             <button onClick={handleSubmit}>Continue</button>
             <span id="register-form-policy-span">
               By registering, you agree to Discord's{" "}
-              <a
-                href="https://discord.com/terms"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <a
-                href="https://discord.com/privacy"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Privacy Policy
-              </a>
-              .
+              <a href="https://discord.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> and{" "}
+              <a href="https://discord.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
             </span>
 
             <span className="login-form-register-span">
