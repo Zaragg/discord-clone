@@ -168,3 +168,8 @@
 .chevron-container:hover {
   cursor: pointer;
 }
+
+.error-span {
+  color: var(--redLight);
+}
+
