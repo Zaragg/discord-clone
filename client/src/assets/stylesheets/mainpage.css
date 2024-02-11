@@ -17,7 +17,7 @@ body {
   margin: 5px;
   flex-shrink: 0;
   object-fit: cover;
-  transition: ease-out 250ms;
+  transition: ease-out 150ms;
 }
 
 .serverIcon:hover {
