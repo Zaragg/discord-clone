@@ -4,13 +4,6 @@ import { ObjectId } from "mongodb";
 
 const router = express.Router();
 
-// recordRoutes is an instance of the express router.
-// We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /listings.
-
-// This will help us connect to the database
-
-// This section will help you get a list of all the records.
 router.get("/users", async (req, res) => {
   let collection = await db.collection("users");
   let results = await collection.find({}).limit(50).toArray();
@@ -22,4 +15,13 @@ router.get("/servers", async (req, res) => {
   let results = await collection.find({}).toArray();
   res.send(results).status(200);
 });
+
+router.get("/:id", async (req, res) => {
+  let collection = await db.collection("servers");
+  let query = { _id: new ObjectId(req.params.id) };
+  let result = await collection.findOne(query);
+  if (!result) res.send("Not found").status(404);
+  else res.send(result).status(200);
+});
+
 export default router;

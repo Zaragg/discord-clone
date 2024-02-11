@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Me from "../../me";
+import Me from "../../Me";
 import Login from "../Login";
 import Register from "../Register";
 

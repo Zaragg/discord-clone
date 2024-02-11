@@ -159,6 +159,7 @@ body {
   flex-direction: column;
   width: 240px;
   min-width: 240px;
+  padding-top: 20px;
 }
 
 .channel {
@@ -167,7 +168,6 @@ body {
   color: #949ba4;
   margin-left: 10px;
   margin-right: 10px;
-  margin-top: 20px;
   align-items: center;
   border-radius: 5px;
   padding: 5px;
