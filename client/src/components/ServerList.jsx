@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-export default function serverList({ handleClick }) {
+export default function serverList({ handleClick, selectedServerID }) {
   const [serverList, setServerList] = useState([]);
   useEffect(() => {
     async function servers() {
@@ -22,7 +22,22 @@ export default function serverList({ handleClick }) {
               key={server._id}
               onClick={() => handleClick(server._id)}
             >
-              <img src={server.icon_url} className="serverIcon"></img>
+              <div
+                className={
+                  server._id == selectedServerID
+                    ? "serverIconSelectedDiv"
+                    : "serverIconDiv"
+                }
+              >
+                <img
+                  src={server.icon_url}
+                  className={
+                    server._id == selectedServerID
+                      ? "serverIconSelected"
+                      : "serverIcon"
+                  }
+                ></img>
+              </div>
               <span className="tooltiptext">{server.name}</span>
             </div>
           );

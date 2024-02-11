@@ -26,7 +26,10 @@ export default function () {
   console.log(selectedServer.channels);
   return (
     <div className="me-page">
-      <ServerList handleClick={handleClick} />
+      <ServerList
+        handleClick={handleClick}
+        selectedServerID={selectedServerID}
+      />
       <Channels Channels={selectedServer.channels} />
       <Chat />
     </div>
