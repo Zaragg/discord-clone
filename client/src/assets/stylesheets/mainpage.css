@@ -17,6 +17,25 @@ body {
   margin: 5px;
   flex-shrink: 0;
   object-fit: cover;
+  transition: ease-out 250ms;
+}
+
+.serverIcon:hover {
+  border-radius: 35%;
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.serverIconSelected {
+  border-radius: 40%;
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  flex-shrink: 0;
+  object-fit: cover;
 }
 
 .servertooltip {
