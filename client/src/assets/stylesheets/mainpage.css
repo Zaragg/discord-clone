@@ -9,6 +9,7 @@ body {
   height: 100vh;
   width: 70px;
   align-items: center;
+  border-right: 1px solid black;
 }
 .serverIcon {
   border-radius: 50%;
@@ -169,7 +170,6 @@ body {
 
 .chat-background {
   background-color: var(--primaryDark400);
-  height: 100vh;
   width: 75vw;
   display: flex;
   flex-direction: column;
@@ -290,8 +290,112 @@ body {
 .channel:hover {
   background-color: #36373d;
   color: white;
+  cursor: pointer;
 }
 
 .channel-name {
   margin-left: 5px;
 }
+
+
+
+/* mainpage for online users, active DMs list, etc */
+
+.side-bar {
+  background-color: #2b2d31;
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  min-width: 240px;
+  padding-top: 20px;
+}
+
+.dm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 0.6rem;
+  height: 20px;
+  color: var(--textDark400);
+}
+
+.dm-list {
+  padding-left: 10px;
+  padding-right: 10px;
+  flex-grow: 1;
+  list-style: none;
+}
+
+.dm-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #949ba4;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.user-list-item {
+  background-color: pink;
+  color: white;
+  background-color: #232428;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  line-height: 2px;
+  font-size: .75rem;  
+}
+
+.dm-list-item:hover {
+  cursor: pointer;
+  background-color: #36373d;
+  color: white;
+}
+
+.user-info-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.user-list-item-pfp-name {
+  display: flex;
+  gap: 5px;
+}
+
+.pfp-placeholder {
+  height: 40px;
+  width: 40px;
+  background-color: var(--primaryDark300);
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.pfp-status {
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  border: 2px solid var(--primaryDark500);
+  border-radius: 100px;
+  left: 27px;
+  top: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pfp-status-busy {
+  background-color: var(--red);
+  color: var(--primaryDark500);
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+
