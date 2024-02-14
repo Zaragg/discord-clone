@@ -8,7 +8,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/channels/@me" element={<Me />} />
-      <Route path="/channels/:serverId/:channelId" element={<Server />} />
+      <Route path="/channels/:serverId/" element={<Server />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
     </Routes>
