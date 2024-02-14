@@ -22,6 +22,47 @@ body {
   position: relative;
 }
 
+.serverIconDiscord {
+  background-color: var(--primaryDark300);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  flex-shrink: 0;
+  object-fit: cover;
+  transition: ease-out 200ms;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.serverIconDiscord:hover {
+  background-color: #5865f2;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  flex-shrink: 0;
+  object-fit: cover;
+  transition: ease-out 200ms;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divider {
+  width: 60%;
+  background: white;
+  height: 2px;
+  border-radius: 1px;
+  opacity: 0.06;
+  transform: scale(0.75);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .serverIconSelected {
   border-radius: 35%;
   height: 50px;
