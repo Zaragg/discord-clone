@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import ServerList from "./components/ServerList";
-import Chat from "./components/Chat";
-import Channels from "./components/Channels";
+import ServerList from "../components/ServerList";
+import Chat from "../components/Chat";
+import Channels from "../components/Channels";
 export default function () {
   const [selectedServerID, setSelectedServerID] = useState("");
   const [selectedServer, setSelectedServer] = useState({});

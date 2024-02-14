@@ -129,7 +129,8 @@ body {
 .chat-background {
   background-color: var(--primaryDark400);
   height: 100vh;
-  width: 75vw;
+  /*width: 75vw;*/
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -254,3 +255,7 @@ body {
 .channel-name {
   margin-left: 5px;
 }
+
+
+
+/* mainpage for online users, active DMs list, etc */
