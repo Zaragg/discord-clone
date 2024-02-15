@@ -31,7 +31,7 @@ export default function Me() {
           </div>
           {dms.map((dm) => {
             return (
-              <li id={dm.id} className="dm-list-item">
+              <li id={dm.id} key={dm.id} className="dm-list-item">
                 <div className="user-info-container">
                   <div className="pfp-placeholder"></div>
                   <p>{dm.name}</p>

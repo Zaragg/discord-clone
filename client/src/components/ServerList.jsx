@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-export default function serverList({ handleClick, selectedServerID }) {
+export default function serverList({ selectedServerID }) {
   const [serverList, setServerList] = useState([]);
   useEffect(() => {
     async function servers() {
@@ -29,11 +29,7 @@ export default function serverList({ handleClick, selectedServerID }) {
         <li className="divider"></li>
         {serverList.map((server) => {
           return (
-            <div
-              className="servertooltip"
-              key={server._id}
-              onClick={() => handleClick(server._id)}
-            >
+            <div className="servertooltip" key={server._id}>
               <div
                 className={
                   server._id == selectedServerID
@@ -41,7 +37,7 @@ export default function serverList({ handleClick, selectedServerID }) {
                     : "serverIconDiv"
                 }
               >
-                <Link to={`/channels/:${server._id}`}>
+                <Link to={`/channels/${server._id}`}>
                   <img
                     src={server.icon_url}
                     className={
