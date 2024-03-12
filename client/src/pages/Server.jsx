@@ -7,6 +7,7 @@ import Channels from "../components/Channels";
 export default function () {
   const [selectedServerID, setSelectedServerID] = useState("");
   const [selectedServer, setSelectedServer] = useState({});
+  const [channels, setChannels] = useState([]);
   // const defaultServerID = "65c67b457a0550f6aaa921dd";
   function handleClick(id) {
     setSelectedServerID(id);
@@ -32,18 +33,39 @@ export default function () {
         const response = await fetch(
           `http://localhost:5000/api/${selectedServerID}`
         ).then((resp) => resp.json());
-        console.log(response);
         setSelectedServer(response);
       }
     }
+    async function channels() {
+      const channels = await fetch(
+        `http://localhost:5000/api/channels/${selectedServerID}`
+      ).then((channels) => channels.json());
+      console.log(channels);
+      setChannels(channels);
+    }
+
     servers();
+    channels();
   }, [selectedServerID]);
 
-  console.log(selectedServer.channels);
+  // useEffect(() => {
+  //   async function channels() {
+  //     if (JSON.stringify(selectedServer) !== "{}") {
+  //       const channels = await fetch(
+  //         `http://localhost:5000/api/channels/${selectedServerID}`
+  //       ).then((channels) => channels.json());
+  //       console.log(channels);
+  //       setChannels(channels);
+  //     }
+  //   }
+
+  //   channels();
+  // }, [selectedServer]);
+
   return (
     <div className="me-page">
       <ServerList selectedServerID={selectedServerID} />
-      <Channels Channels={selectedServer.channels} />
+      <Channels Channels={channels} />
       <Chat />
     </div>
   );

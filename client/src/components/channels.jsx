@@ -9,7 +9,7 @@ export default function channels({ Channels }) {
           return (
             <div className="channel">
               <box-icon name="hash" color="#949ba4"></box-icon>
-              <div className="channel-name">{channel}</div>
+              <div className="channel-name">{channel.name}</div>
             </div>
           );
         })
