@@ -8,9 +8,15 @@ export default function () {
   const [selectedServerID, setSelectedServerID] = useState("");
   const [selectedServer, setSelectedServer] = useState({});
   const [channels, setChannels] = useState([]);
+  const [selectedChannel, setSelectedChannel] = useState();
   // const defaultServerID = "65c67b457a0550f6aaa921dd";
   function handleClick(id) {
     setSelectedServerID(id);
+  }
+
+  function channelSelect(id) {
+    console.log(id);
+    setSelectedChannel(id);
   }
   //if (selectedServerID == "") setSelectedServerID(defaultServerID);
 
@@ -48,25 +54,11 @@ export default function () {
     channels();
   }, [selectedServerID]);
 
-  // useEffect(() => {
-  //   async function channels() {
-  //     if (JSON.stringify(selectedServer) !== "{}") {
-  //       const channels = await fetch(
-  //         `http://localhost:5000/api/channels/${selectedServerID}`
-  //       ).then((channels) => channels.json());
-  //       console.log(channels);
-  //       setChannels(channels);
-  //     }
-  //   }
-
-  //   channels();
-  // }, [selectedServer]);
-
   return (
     <div className="me-page">
       <ServerList selectedServerID={selectedServerID} />
-      <Channels Channels={channels} />
-      <Chat />
+      <Channels Channels={channels} channelSelect={channelSelect} />
+      <Chat channel={selectedChannel} />
     </div>
   );
 }
