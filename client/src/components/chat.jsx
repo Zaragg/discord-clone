@@ -5,26 +5,37 @@ import MessageBox from "./MessageBox";
 //so we get the user info from the server
 //and pass it to this
 
-export default function Chat({ channel }) {
+export default function Chat({ channel, defaultChannel }) {
   const [date, setDate] = useState(new Date());
   const [messages, setMessages] = useState([]);
+
   useEffect(() => {
     async function messages() {
       const response = await fetch(
         `http://localhost:5000/api/message/${channel}`
       ).then((resp) => resp.json());
       setMessages(response);
+      console.log(response);
     }
+
     messages();
-  }, []);
+  }, [channel]);
 
   return (
     <div className="chat-background">
-      <Message
-        username={"User 1"}
-        time={date.toDateString()}
-        text={"Hello this is a test."}
-      />
+      {messages ? (
+        messages.map((message) => {
+          return (
+            <Message
+              userID={message.author_id}
+              time={date.toDateString()}
+              text={message.message_content}
+            />
+          );
+        })
+      ) : (
+        <p>Loading...</p>
+      )}
       <div className="message-box">
         <MessageBox />
       </div>

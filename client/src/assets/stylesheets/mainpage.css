@@ -185,6 +185,7 @@ body {
   border-radius: 50%;
   height: 45px;
   width: 45px;
+  object-fit: cover;
   flex-shrink: 0;
 }
 
@@ -289,15 +290,27 @@ body {
 
 .channel:hover {
   background-color: #36373d;
-  color: white;
+  color: rgb(234, 234, 234);
   cursor: pointer;
 }
 
+.channel-selected {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  margin-right: 10px;
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  background-color: #404249;
+}
+.channel-selected:hover {
+  cursor: pointer;
+}
 .channel-name {
   margin-left: 5px;
 }
-
-
 
 /* mainpage for online users, active DMs list, etc */
 
@@ -346,7 +359,7 @@ body {
   align-items: center;
   justify-content: space-evenly;
   line-height: 2px;
-  font-size: .75rem;  
+  font-size: 0.75rem;
 }
 
 .dm-list-item:hover {
@@ -397,5 +410,3 @@ body {
   font-weight: bolder;
   font-size: 20px;
 }
-
-

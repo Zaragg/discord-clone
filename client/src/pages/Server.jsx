@@ -7,6 +7,7 @@ import Channels from "../components/Channels";
 export default function () {
   const [selectedServerID, setSelectedServerID] = useState("");
   const [selectedServer, setSelectedServer] = useState({});
+  const [defaultChannel, setDefaultChannel] = useState();
   const [channels, setChannels] = useState([]);
   const [selectedChannel, setSelectedChannel] = useState();
   // const defaultServerID = "65c67b457a0550f6aaa921dd";
@@ -46,8 +47,8 @@ export default function () {
       const channels = await fetch(
         `http://localhost:5000/api/channels/${selectedServerID}`
       ).then((channels) => channels.json());
-      console.log(channels);
       setChannels(channels);
+      setDefaultChannel(channels[0]._id);
     }
 
     servers();
@@ -57,7 +58,12 @@ export default function () {
   return (
     <div className="me-page">
       <ServerList selectedServerID={selectedServerID} />
-      <Channels Channels={channels} channelSelect={channelSelect} />
+      <Channels
+        Channels={channels}
+        channelSelect={channelSelect}
+        selectedChannel={selectedChannel}
+        defaultChannel={defaultChannel}
+      />
       <Chat channel={selectedChannel} />
     </div>
   );
