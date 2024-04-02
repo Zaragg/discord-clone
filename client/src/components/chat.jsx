@@ -5,17 +5,19 @@ import MessageBox from "./MessageBox";
 //so we get the user info from the server
 //and pass it to this
 
-export default function Chat({ channel, defaultChannel }) {
+export default function Chat({ channel }) {
   const [date, setDate] = useState(new Date());
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     async function messages() {
-      const response = await fetch(
-        `http://localhost:5000/api/message/${channel}`
-      ).then((resp) => resp.json());
-      setMessages(response);
-      console.log(response);
+      if (channel) {
+        const response = await fetch(
+          `http://localhost:5000/api/message/${channel}`
+        ).then((resp) => resp.json());
+        setMessages(response);
+        console.log(response);
+      }
     }
 
     messages();
@@ -37,7 +39,7 @@ export default function Chat({ channel, defaultChannel }) {
         <p>Loading...</p>
       )}
       <div className="message-box">
-        <MessageBox />
+        <MessageBox channel={channel} />
       </div>
     </div>
   );

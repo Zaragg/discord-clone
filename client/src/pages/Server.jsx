@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import ServerList from "../components/ServerList";
 import Chat from "../components/Chat";
 import Channels from "../components/Channels";
@@ -19,45 +19,56 @@ export default function () {
     console.log(id);
     setSelectedChannel(id);
   }
-  //if (selectedServerID == "") setSelectedServerID(defaultServerID);
 
-  var route = useLocation();
-  var Afterslash = route.pathname.lastIndexOf("/");
-  const serverRouteID = route.pathname.substring(Afterslash + 1);
+  // MAKE SURE TO TRY USEPARAMS INSTEAD
+  // var route = useLocation();
+  // var Afterslash = route.pathname.lastIndexOf("/");
+  // const serverRouteID = route.pathname.substring(Afterslash + 1);
 
-  useEffect(() => {
-    async function getID() {
-      setSelectedServerID(serverRouteID);
-    }
-    getID();
-  }, [route]);
+  // useEffect(() => {
+  //   async function getID() {
+  //     setSelectedServerID(serverRouteID);
+  //   }
+  //   getID();
+  // }, [route]);
 
-  console.log(`selected server ID: ${selectedServerID}`);
+  const { serverId } = useParams();
+  console.log(serverId);
+  // useEffect(() => {
+  //   async function getID() {
+  //     setSelectedServerID(serverId);
+  //     console.log(`selected server ID: ${selectedServerID}`);
+  //   }
+
+  //   getID();
+  // }, [serverId]);
 
   useEffect(() => {
     async function servers() {
-      if (selectedServerID !== "") {
+      if (serverId) {
         const response = await fetch(
-          `http://localhost:5000/api/${selectedServerID}`
+          `http://localhost:5000/api/${serverId}`
         ).then((resp) => resp.json());
         setSelectedServer(response);
       }
     }
     async function channels() {
-      const channels = await fetch(
-        `http://localhost:5000/api/channels/${selectedServerID}`
-      ).then((channels) => channels.json());
-      setChannels(channels);
-      setDefaultChannel(channels[0]._id);
+      if (serverId) {
+        const channels = await fetch(
+          `http://localhost:5000/api/channels/${serverId}`
+        ).then((channels) => channels.json());
+        setChannels(channels);
+        setDefaultChannel(channels[0]._id);
+      }
     }
 
     servers();
     channels();
-  }, [selectedServerID]);
+  }, [serverId]);
 
   return (
     <div className="me-page">
-      <ServerList selectedServerID={selectedServerID} />
+      <ServerList selectedServerID={serverId} />
       <Channels
         Channels={channels}
         channelSelect={channelSelect}
