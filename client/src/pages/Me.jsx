@@ -1,4 +1,5 @@
 import ServerList from "../components/ServerList";
+import UserCard from "../components/UserCard";
 
 export default function Me() {
   const dms = [
@@ -42,46 +43,7 @@ export default function Me() {
           })}
         </ul>
 
-        <div className="user-list-item">
-          <div className="user-list-item-pfp-name">
-            <div className="pfp-placeholder">
-              <div className="pfp-status pfp-status-busy">
-                <box-icon
-                  name="minus"
-                  flip="horizontal"
-                  color="#1E1F22"
-                  size="15px"
-                ></box-icon>
-              </div>
-            </div>
-            <div>
-              <p>pomegranat...</p>
-              <p>Do Not Distu...</p>
-            </div>
-          </div>
-          <div>
-            <box-icon
-              name="microphone-off"
-              type="solid"
-              flip="horizontal"
-              color="#EC3E41"
-              size="20px"
-            ></box-icon>
-            <box-icon
-              name="headphone"
-              flip="horizontal"
-              size="20px"
-              color="#B5BAC1"
-            ></box-icon>
-            <box-icon
-              name="cog"
-              type="solid"
-              flip="horizontal"
-              size="20px"
-              color="#B5BAC1"
-            ></box-icon>
-          </div>
-        </div>
+        <UserCard />
       </div>
       <div className="chat-background" style={{ width: "100%" }}></div>
     </div>

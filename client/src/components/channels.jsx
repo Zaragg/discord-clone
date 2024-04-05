@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from "react";
+import UserCard from "./UserCard";
 
 export default function channels({
   Channels,
@@ -16,25 +17,30 @@ export default function channels({
   }, [Channels]);
 
   return (
-    <div className="channel-list">
-      {Channels ? (
-        Channels.map((channel) => {
-          return (
-            <div
-              className={
-                channel._id == selectedChannel ? "channel-selected" : "channel"
-              }
-              key={channel._id}
-              onClick={() => channelSelect(channel._id)}
-            >
-              <box-icon name="hash" color="#949ba4"></box-icon>
-              <div className="channel-name">{channel.name}</div>
-            </div>
-          );
-        })
-      ) : (
-        <p>Loading</p>
-      )}
+    <div className="channel-container">
+      <div className="channel-list">
+        {Channels ? (
+          Channels.map((channel) => {
+            return (
+              <div
+                className={
+                  channel._id == selectedChannel
+                    ? "channel-selected"
+                    : "channel"
+                }
+                key={channel._id}
+                onClick={() => channelSelect(channel._id)}
+              >
+                <box-icon name="hash" color="#949ba4"></box-icon>
+                <div className="channel-name">{channel.name}</div>
+              </div>
+            );
+          })
+        ) : (
+          <p>Loading</p>
+        )}
+      </div>
+      <UserCard />
     </div>
   );
 }

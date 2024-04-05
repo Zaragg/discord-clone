@@ -91,9 +91,6 @@ router.get(
     if (token) {
       try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        // req.user = await db
-        //   .collection("users")
-        //   .findOne({ _id: new ObjectId(decoded.userId) });
         let collection = await db.collection("users");
         req.user = await collection.findOne({
           _id: new ObjectId(decoded.userId),
@@ -106,9 +103,65 @@ router.get(
       res.send("Not authorized").status(404);
     }
   },
-  (req, res) => {
-    res.send("get user profile").status(200);
+  async (req, res) => {
+    let collection = await db.collection("users");
+    const user = await collection.findOne({ _id: new ObjectId(req.user._id) });
+    res.status(200).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      avatar_url: user.avatar_url,
+    });
   }
 );
+
+router.post("/users/register", async (req, res) => {
+  const { username, email, password } = req.body;
+  let collection = await db.collection("users");
+  const userExists = await collection.findOne({ email });
+
+  if (userExists) {
+    return res.status(400).json({ message: "user already exists" });
+  }
+
+  const user = await collection.insertOne({
+    username,
+    email,
+    password,
+  });
+
+  if (user) {
+    //jwt token
+
+    const token = jwt.sign(
+      { userId: user.insertedId },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "30d",
+      }
+    );
+    //save as http only coookie
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
+    return res.status(201).json({
+      _id: user.insertedId,
+    });
+  } else {
+    res.status(400).json({ message: "error occured" });
+  }
+});
+
+router.post("/users/logout", async (req, res) => {
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+
+  res.status(200).json({ message: "Logged out" });
+});
 
 export default router;

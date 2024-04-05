@@ -1,13 +1,30 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function Login() {
-  const [identifier, setIdentifier] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [formError, setFormError] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`identifier: ${identifier}, password: ${password}`);
+    try {
+      const response = await fetch(`http://localhost:5000/api/users/auth`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      }).then((resp) => resp.json());
+      console.log(response);
+      navigate("/channels/@me");
+    } catch (error) {
+      console.log("Error");
+      setFormError(true);
+    }
   };
 
   return (
@@ -18,7 +35,7 @@ export default function Login() {
             <h2>Welcome back!</h2>
             <p>We're so excited to see you again!</p>
           </div>
-
+          {formError && <p style={{ color: "red" }}>Wrong email or password</p>}
           <div className="login-form-fields">
             <div className="form-input-field identifier-login-field">
               <label className="required">
@@ -26,8 +43,8 @@ export default function Login() {
               </label>
               <input
                 type="text"
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -42,7 +59,9 @@ export default function Login() {
               />
             </div>
 
-            <span><Link>Forgot your password?</Link></span>
+            <span>
+              <Link>Forgot your password?</Link>
+            </span>
 
             <button onClick={handleSubmit}>Log In</button>
 

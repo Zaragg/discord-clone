@@ -268,6 +268,11 @@ body {
   cursor: pointer;
 }
 
+.channel-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .channel-list {
   background-color: #2b2d31;
   display: flex;
@@ -275,6 +280,7 @@ body {
   width: 240px;
   min-width: 240px;
   padding-top: 20px;
+  flex-grow: 1;
 }
 
 .channel {
@@ -380,7 +386,16 @@ body {
   gap: 5px;
 }
 
-.pfp-placeholder {
+.pfp-container {
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.pfp {
   height: 40px;
   width: 40px;
   background-color: var(--primaryDark300);
@@ -388,6 +403,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  object-fit: cover;
   position: relative;
 }
 
