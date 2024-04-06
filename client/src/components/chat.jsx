@@ -1,13 +1,18 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import Message from "./Message";
 import MessageBox from "./MessageBox";
-//mayhaps this should in the future react(heh) on a message event triggered when a user sends msg
-//so we get the user info from the server
-//and pass it to this
 
 export default function Chat({ channel }) {
-  const [date, setDate] = useState(new Date());
   const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+  const messagesEndRef = useRef();
+  const setNewMessageReceived = (message) => {
+    setNewMessage(message);
+  };
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView();
+  };
 
   useEffect(() => {
     async function messages() {
@@ -21,25 +26,35 @@ export default function Chat({ channel }) {
     }
 
     messages();
-  }, [channel]);
+    setTimeout(() => {
+      scrollToBottom();
+    }, 200);
+  }, [channel, newMessage]);
 
   return (
     <div className="chat-background">
       {messages ? (
         messages.map((message) => {
           return (
-            <Message
-              userID={message.author_id}
-              time={date.toDateString()}
-              text={message.message_content}
-            />
+            <div key={message._id} ref={messagesEndRef}>
+              <Message
+                userID={message.author_id}
+                time={message.timestamp}
+                text={message.message_content}
+              />
+            </div>
           );
         })
       ) : (
         <p>Loading...</p>
       )}
-      <div className="message-box">
-        <MessageBox channel={channel} />
+      <div className="message-box-container">
+        <div className="message-box">
+          <MessageBox
+            channel={channel}
+            setNewMessageReceived={setNewMessageReceived}
+          />
+        </div>
       </div>
     </div>
   );

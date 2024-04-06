@@ -1,7 +1,6 @@
 body {
   font-family: "Helvetica-neue", sans-serif;
 }
-
 .serverList {
   background-color: var(--primaryDark500);
   display: flex;
@@ -173,6 +172,23 @@ body {
   width: 75vw;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+  overflow-x: hidden;
+  max-height: 100vh;
+}
+
+.chat-background::-webkit-scrollbar {
+  width: 10px;
+}
+.chat-background::-webkit-scrollbar-track {
+  background: #2b2d31;
+}
+.chat-background::-webkit-scrollbar-thumb {
+  background: #1a1b1e;
+  border-radius: 5px;
+}
+.chat-background::-webkit-scrollbar-thumb:hover {
+  background: #1a1b1e;
 }
 
 .me-page {
@@ -228,25 +244,37 @@ body {
   font-size: 16px;
 }
 
+.message-box-container {
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
+  padding-bottom: 20px;
+  justify-content: center;
+  background-color: var(--primaryDark400);
+}
+
 .message-box {
   display: flex;
   flex-direction: row;
   margin-top: auto;
   position: sticky;
-  margin-bottom: 20px;
+  bottom: 0;
   justify-content: center;
 }
 
 .message-input {
   display: flex;
   align-items: center;
-  background-color: var(--primaryDark300);
+  background-color: #383a40;
   width: 100%;
   margin-left: 15px;
   margin-right: 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 7px;
   padding: 10px;
+}
+.message-box form {
+  width: 100%;
 }
 
 .message-box input {
@@ -256,7 +284,7 @@ body {
   font-size: 1.1rem;
   box-sizing: border-box;
   width: 90%;
-  background-color: var(--primaryDark300);
+  background-color: #383a40;
   margin-left: 10px;
 }
 
@@ -425,4 +453,9 @@ body {
   color: var(--primaryDark500);
   font-weight: bolder;
   font-size: 20px;
+}
+.user-list {
+  background-color: #2b2d31;
+  min-width: 240px;
+  max-width: 240px;
 }

@@ -1,10 +1,23 @@
 import { React, useEffect, useState } from "react";
 
-export default function MessageBox({ channel }) {
+export default function MessageBox({ channel, setNewMessageReceived }) {
   const [Message, setMessage] = useState("");
   const [channelName, setChannelName] = useState("");
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const response = await fetch(`http://localhost:5000/api/message/send`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: Message, channelID: channel }),
+    }).then((resp) => resp.json());
+    console.log(Message);
+    console.log(channel);
+    setMessage("");
+    setNewMessageReceived(Message);
   };
   useEffect(() => {
     async function getChannelName() {
@@ -27,11 +40,17 @@ export default function MessageBox({ channel }) {
           size="26px"
         ></box-icon>
       </div>
-      <input
-        type="text"
-        name="message"
-        placeholder={`Message #${channelName}`}
-      />
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <input
+          type="text"
+          name="message"
+          placeholder={`Message #${channelName}`}
+          value={Message}
+          onChange={(e) => {
+            setMessage(e.target.value);
+          }}
+        />
+      </form>
     </div>
   );
 }

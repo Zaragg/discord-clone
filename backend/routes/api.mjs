@@ -48,6 +48,48 @@ router.get("/message/:id", async (req, res) => {
   else res.send(result).status(200);
 });
 
+router.post(
+  "/message/send",
+  async (req, res, next) => {
+    let token;
+    token = req.cookies.jwt;
+    if (token) {
+      try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        req.user = decoded.userId;
+
+        next();
+      } catch (error) {
+        res.send("Token failed").status(401);
+      }
+    } else {
+      res.send("Not authorized").status(404);
+    }
+  },
+  async (req, res) => {
+    let time = new Date();
+    let collection = await db.collection("message");
+    let message = req.body.message;
+    let channel = req.body.channelID;
+    try {
+      const insertMessage = await collection.insertOne({
+        author_id: new ObjectId(req.user),
+        message_content: message,
+        channelID: new ObjectId(channel),
+        timestamp: time,
+      });
+      return res.status(201).json({
+        _id: insertMessage.insertedId,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    if (!result) res.send("Not found").status(404);
+    else res.send(result).status(200);
+  }
+);
+
 router.get("/user/:id", async (req, res) => {
   let collection = await db.collection("users");
   let query = { _id: new ObjectId(req.params.id) };

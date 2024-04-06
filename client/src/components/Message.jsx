@@ -1,19 +1,22 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 //need to implement the avatar not being duplicated
 //when user sends message again here I think
 
 export default function Message({ userID, time, text }) {
-  const [userInfo, setUserInfo] = useState({});
   async function fetchUserData(userID) {
     const response = await fetch(
       `http://localhost:5000/api/user/${userID}`
     ).then((resp) => resp.json());
-    setUserInfo(response);
+    return response;
   }
-
-  fetchUserData(userID);
-
-  return (
+  const { data: userInfo, isLoading } = useQuery({
+    queryKey: ["user", userID],
+    queryFn: () => fetchUserData(userID),
+  });
+  return isLoading ? (
+    "Loading"
+  ) : (
     <div className="message">
       <div>
         <img src={userInfo.avatar_url} className="avatar"></img>

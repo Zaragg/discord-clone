@@ -4,6 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 import ServerList from "../components/ServerList";
 import Chat from "../components/Chat";
 import Channels from "../components/Channels";
+import UserList from "../components/UserList";
 export default function () {
   const [selectedServerID, setSelectedServerID] = useState("");
   const [selectedServer, setSelectedServer] = useState({});
@@ -76,6 +77,7 @@ export default function () {
         defaultChannel={defaultChannel}
       />
       <Chat channel={selectedChannel} />
+      <UserList />
     </div>
   );
 }
