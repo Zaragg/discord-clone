@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useRef } from "react";
 import Message from "./Message";
 import MessageBox from "./MessageBox";
-
+import { formatTime } from "../../utils/formatTime";
 export default function Chat({ channel }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -39,7 +39,7 @@ export default function Chat({ channel }) {
             <div key={message._id} ref={messagesEndRef}>
               <Message
                 userID={message.author_id}
-                time={message.timestamp}
+                time={formatTime(message.timestamp)}
                 text={message.message_content}
               />
             </div>
