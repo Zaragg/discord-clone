@@ -1,9 +1,26 @@
 import React from "react";
+import { useAuthContext } from "../../context/AuthContext";
+
 const user = await fetch(`http://localhost:5000/api/users/profile`, {
   credentials: "include",
 }).then((resp) => resp.json());
-console.log(user);
+
 function UserCard() {
+  const { setAuthState } = useAuthContext();
+
+  const logOutHandler = async () => {
+    const response = await fetch(`http://localhost:5000/api/users/logout`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }).then((resp) => resp.json());
+    localStorage.removeItem("userInfo", JSON.stringify(response));
+    setAuthState(null);
+  };
+
   return (
     <div className="user-list-item">
       <div className="user-list-item-pfp-name">
@@ -37,13 +54,9 @@ function UserCard() {
           size="20px"
           color="#B5BAC1"
         ></box-icon>
-        <box-icon
-          name="cog"
-          type="solid"
-          flip="horizontal"
-          size="20px"
-          color="#B5BAC1"
-        ></box-icon>
+        <div className="log-out-button" onClick={() => logOutHandler()}>
+          <box-icon name="log-out" color="#B5BAC1" size="20px"></box-icon>
+        </div>
       </div>
     </div>
   );

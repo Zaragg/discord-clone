@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState(false);
   const navigate = useNavigate();
-
+  const { setAuthState } = useAuthContext();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -20,6 +21,9 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
       }).then((resp) => resp.json());
       console.log(response);
+      //put user in localstorage and update context
+      localStorage.setItem("userInfo", JSON.stringify(response));
+      setAuthState(response);
       navigate("/channels/@me");
     } catch (error) {
       console.log("Error");

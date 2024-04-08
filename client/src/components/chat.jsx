@@ -21,7 +21,6 @@ export default function Chat({ channel }) {
           `http://localhost:5000/api/message/${channel}`
         ).then((resp) => resp.json());
         setMessages(response);
-        console.log(response);
       }
     }
 

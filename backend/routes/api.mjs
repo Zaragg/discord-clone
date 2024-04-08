@@ -16,6 +16,13 @@ router.get("/servers", async (req, res) => {
   res.send(results).status(200);
 });
 
+router.get("/serversusers/:id", async (req, res) => {
+  let collection = await db.collection("users");
+  let query = { joined_servers: new ObjectId(req.params.id) };
+  let results = await collection.find(query).toArray();
+  res.send(results).status(200);
+});
+
 router.get("/:id", async (req, res) => {
   let collection = await db.collection("servers");
   let query = { _id: new ObjectId(req.params.id) };
@@ -139,10 +146,10 @@ router.get(
         });
         next();
       } catch (error) {
-        res.send("Token failed").status(401);
+        res.status(404).json({ message: "Token failed" });
       }
     } else {
-      res.send("Not authorized").status(404);
+      res.status(404).json({ message: "Not authorized" });
     }
   },
   async (req, res) => {

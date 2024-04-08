@@ -175,6 +175,7 @@ body {
   overflow: scroll;
   overflow-x: hidden;
   max-height: 100vh;
+  margin-right: 5px;
 }
 
 .chat-background::-webkit-scrollbar {
@@ -182,6 +183,8 @@ body {
 }
 .chat-background::-webkit-scrollbar-track {
   background: #2b2d31;
+  margin-bottom: 65px;
+  border-radius: 5px;
 }
 .chat-background::-webkit-scrollbar-thumb {
   background: #1a1b1e;
@@ -194,6 +197,7 @@ body {
 .me-page {
   display: flex;
   flex-direction: row;
+  background-color: var(--primaryDark400);
 }
 
 .avatar {
@@ -434,6 +438,17 @@ body {
   object-fit: cover;
   position: relative;
 }
+.pfp-offline {
+  height: 40px;
+  width: 40px;
+  background-color: var(--primaryDark300);
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
+  position: relative;
+}
 
 .pfp-status {
   position: absolute;
@@ -458,4 +473,41 @@ body {
   background-color: #2b2d31;
   min-width: 240px;
   max-width: 240px;
+}
+.user-list img {
+  height: 35px;
+  width: 35px;
+}
+
+.user-list p {
+  color: white;
+  font-size: 12px;
+}
+.user-list-card {
+  margin-left: 10px;
+  margin-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  width: 90%;
+  gap: 10px;
+}
+
+.user-list-card:hover {
+  background-color: var(--primaryDark400);
+}
+
+.online-text {
+  color: gray;
+  margin-left: 15px;
+}
+
+.log-out-button {
+  display: inline;
+}
+.log-out-button:hover {
+  cursor: pointer;
 }

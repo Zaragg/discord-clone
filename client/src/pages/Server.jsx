@@ -15,7 +15,6 @@ export default function () {
   function handleClick(id) {
     setSelectedServerID(id);
   }
-
   function channelSelect(id) {
     console.log(id);
     setSelectedChannel(id);
@@ -47,10 +46,10 @@ export default function () {
   useEffect(() => {
     async function servers() {
       if (serverId) {
-        const response = await fetch(
+        const server = await fetch(
           `http://localhost:5000/api/${serverId}`
         ).then((resp) => resp.json());
-        setSelectedServer(response);
+        setSelectedServer(server);
       }
     }
     async function channels() {
@@ -77,7 +76,7 @@ export default function () {
         defaultChannel={defaultChannel}
       />
       <Chat channel={selectedChannel} />
-      <UserList />
+      <UserList serverId={serverId} />
     </div>
   );
 }
