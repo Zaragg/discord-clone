@@ -3,7 +3,7 @@ import db from "../db/conn.mjs";
 import { ObjectId } from "mongodb";
 import jwt from "jsonwebtoken";
 const router = express.Router();
-
+import { io } from "../socket/socket.mjs";
 router.get("/users", async (req, res) => {
   let collection = await db.collection("users");
   let results = await collection.find({}).limit(50).toArray();
@@ -86,6 +86,7 @@ router.post(
         channelID: new ObjectId(channel),
         timestamp: time,
       });
+      io.emit("newMessage", insertMessage.insertedId);
       return res.status(201).json({
         _id: insertMessage.insertedId,
       });
@@ -126,6 +127,7 @@ router.post("/users/auth", async (req, res) => {
       _id: user._id,
       name: user.username,
       email: user.email,
+      avatar_url: user.avatar_url,
     });
   } else {
     res.send("Invalid email or password").status(404);
@@ -146,7 +148,7 @@ router.get(
         });
         next();
       } catch (error) {
-        res.status(404).json({ message: "Token failed" });
+        res.status(401).json({ message: "Token failed" });
       }
     } else {
       res.status(404).json({ message: "Not authorized" });

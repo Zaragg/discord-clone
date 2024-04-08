@@ -469,6 +469,15 @@ body {
   font-weight: bolder;
   font-size: 20px;
 }
+
+.pfp-status-busy-offline {
+  visibility: hidden;
+  background-color: var(--red);
+  color: var(--primaryDark500);
+  font-weight: bolder;
+  font-size: 20px;
+}
+
 .user-list {
   background-color: #2b2d31;
   min-width: 240px;

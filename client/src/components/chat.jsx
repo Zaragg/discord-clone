@@ -2,10 +2,12 @@ import { React, useState, useEffect, useRef } from "react";
 import Message from "./Message";
 import MessageBox from "./MessageBox";
 import { formatTime } from "../../utils/formatTime";
+import { useSocketContext } from "../../context/SocketContext";
 export default function Chat({ channel }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef();
+  const { socket } = useSocketContext();
   const setNewMessageReceived = (message) => {
     setNewMessage(message);
   };
@@ -28,7 +30,11 @@ export default function Chat({ channel }) {
     setTimeout(() => {
       scrollToBottom();
     }, 200);
-  }, [channel, newMessage]);
+    socket?.on("newMessage", (newMessage) => {
+      setNewMessage(newMessage);
+    });
+    return () => socket?.off("newMessage");
+  }, [channel, newMessage, socket]);
 
   return (
     <div className="chat-background">

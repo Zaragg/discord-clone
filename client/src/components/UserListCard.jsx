@@ -5,7 +5,13 @@ export default function UserListCard({ member, isOffline }) {
     <div className={isOffline ? "user-list-card-offline" : "user-list-card"}>
       <div className="pfp-container">
         <img src={member.avatar_url} className="pfp"></img>
-        <div className="pfp-status pfp-status-busy">
+        <div
+          className={
+            isOffline
+              ? "pfp-status pfp-status-busy-offline"
+              : "pfp-status pfp-status-busy"
+          }
+        >
           <box-icon
             name="minus"
             flip="horizontal"

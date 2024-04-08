@@ -9,6 +9,7 @@ const AppRoutes = () => {
   const { authState } = useAuthContext();
   return (
     <Routes>
+      <Route path="/" element={authState ? <Me /> : <Navigate to="/login" />} />
       <Route
         path="/channels/@me"
         element={authState ? <Me /> : <Navigate to="/login" />}

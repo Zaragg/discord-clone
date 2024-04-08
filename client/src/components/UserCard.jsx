@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 
-const user = await fetch(`http://localhost:5000/api/users/profile`, {
-  credentials: "include",
-}).then((resp) => resp.json());
+// const user = await fetch(`http://localhost:5000/api/users/profile`, {
+//   credentials: "include",
+// }).then((resp) => resp.json());
 
+// const { authState } = useAuthContext();
+// const user = authState;
 function UserCard() {
-  const { setAuthState } = useAuthContext();
-
+  const { authState } = useAuthContext();
+  const user = authState;
   const logOutHandler = async () => {
     const response = await fetch(`http://localhost:5000/api/users/logout`, {
       method: "POST",
@@ -36,7 +38,7 @@ function UserCard() {
           </div>
         </div>
         <div>
-          <p>{user.username}</p>
+          <p>{user.name}</p>
           <p>Do Not Distu...</p>
         </div>
       </div>
