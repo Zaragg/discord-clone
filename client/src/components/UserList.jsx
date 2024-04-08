@@ -22,15 +22,17 @@ function UserList({ serverId }) {
     <div className="user-list">
       <div className="online-text">
         <p>ONLINE - {onlineUsers.length}</p>
-        {memberList
-          .filter((member) => onlineUsers.includes(member._id))
-          .map((filtered) => (
-            <UserListCard member={filtered} isOffline={false} />
-          ))}
       </div>
+      {memberList
+        .filter((member) => onlineUsers.includes(member._id))
+        .map((filtered) => (
+          <UserListCard member={filtered} isOffline={false} />
+        ))}
 
-      <div className="online-text">
-        <p>OFFLINE - {memberList.length - onlineUsers.length}</p>
+      <div>
+        <div className="online-text">
+          <p>OFFLINE - {memberList.length - onlineUsers.length}</p>
+        </div>
         {memberList
           .filter((member) => !onlineUsers.includes(member._id))
           .map((filtered) => (

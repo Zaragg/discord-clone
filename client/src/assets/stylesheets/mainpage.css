@@ -499,7 +499,23 @@ body {
 .user-list-card:hover {
   background-color: var(--primaryDark400);
 }
-
+.user-list-card-offline {
+  margin-left: 10px;
+  margin-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  width: 90%;
+  gap: 10px;
+  filter: grayscale(60%);
+}
+.user-list-card-offline:hover {
+  background-color: var(--primaryDark400);
+  filter: grayscale(0);
+}
 .online-text {
   color: gray;
   margin-left: 15px;

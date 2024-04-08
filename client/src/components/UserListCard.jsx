@@ -2,7 +2,7 @@ import React from "react";
 
 export default function UserListCard({ member, isOffline }) {
   return (
-    <div className="user-list-card">
+    <div className={isOffline ? "user-list-card-offline" : "user-list-card"}>
       <div className="pfp-container">
         <img src={member.avatar_url} className="pfp"></img>
         <div className="pfp-status pfp-status-busy">
