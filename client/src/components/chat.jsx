@@ -3,10 +3,13 @@ import Message from "./Message";
 import MessageBox from "./MessageBox";
 import { formatTime } from "../../utils/formatTime";
 import { useSocketContext } from "../../context/SocketContext";
+import { useAuthContext } from "../../context/AuthContext";
 export default function Chat({ channel }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [typingText, setTypingText] = useState("");
   const messagesEndRef = useRef();
+  const { authState } = useAuthContext();
   const { socket } = useSocketContext();
   const setNewMessageReceived = (message) => {
     setNewMessage(message);
@@ -15,7 +18,7 @@ export default function Chat({ channel }) {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView();
   };
-
+  let timer;
   useEffect(() => {
     async function messages() {
       if (channel) {
@@ -33,7 +36,20 @@ export default function Chat({ channel }) {
     socket?.on("newMessage", (newMessage) => {
       setNewMessage(newMessage);
     });
-    return () => socket?.off("newMessage");
+    socket?.on("typing", (currentUser, currentChannel) => {
+      if (currentUser._id == authState._id || currentChannel !== channel) {
+        return;
+      }
+      clearTimeout(timer);
+      setTypingText(currentUser.name);
+      timer = setTimeout(() => {
+        setTypingText("");
+      }, 3000);
+    });
+    return () => {
+      socket?.off("newMessage");
+      socket?.off("typing");
+    };
   }, [channel, newMessage, socket]);
 
   return (
@@ -59,6 +75,12 @@ export default function Chat({ channel }) {
             channel={channel}
             setNewMessageReceived={setNewMessageReceived}
           />
+        </div>
+        <div
+          className={typingText == "" ? "typing-text" : "typing-text-visible"}
+        >
+          <div className="dot-flashing"></div>
+          <p>{typingText} is typing...</p>
         </div>
       </div>
     </div>

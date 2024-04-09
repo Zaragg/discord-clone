@@ -26,7 +26,11 @@ function UserList({ serverId }) {
       {memberList
         .filter((member) => onlineUsers.includes(member._id))
         .map((filtered) => (
-          <UserListCard member={filtered} isOffline={false} />
+          <UserListCard
+            member={filtered}
+            isOffline={false}
+            key={filtered._id}
+          />
         ))}
 
       <div>

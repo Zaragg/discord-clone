@@ -27,6 +27,11 @@ io.on("connection", (socket) => {
     delete userSocketMap[userId];
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
+
+  socket.on("typing", (currentUser, currentChannel) => {
+    console.log(` ${currentUser.name}is typing in ${currentChannel}`);
+    io.emit("typing", currentUser, currentChannel);
+  });
 });
 
 export { app, io, server };
