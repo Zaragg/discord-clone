@@ -62,6 +62,7 @@ export default function Chat({ channel }) {
                 userID={message.author_id}
                 time={formatTime(message.timestamp)}
                 text={message.message_content}
+                messageID={message._id}
               />
             </div>
           );

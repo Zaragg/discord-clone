@@ -98,6 +98,30 @@ router.post(
   }
 );
 
+router.post("/message/update", async (req, res) => {
+  let collection = await db.collection("message");
+  let messageID = req.body.messageID;
+  let newMessage = req.body.newMessage;
+  try {
+    const updateMessage = await collection.updateOne(
+      { _id: new ObjectId(messageID) },
+      {
+        $set: {
+          message_content: newMessage,
+        },
+      }
+    );
+    io.emit("newMessage", updateMessage);
+    return res.status(201).json({
+      _id: updateMessage,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  if (!updateMessage) res.send("Not found").status(404);
+  else res.send(updateMessage).status(200);
+});
+
 router.get("/user/:id", async (req, res) => {
   let collection = await db.collection("users");
   let query = { _id: new ObjectId(req.params.id) };

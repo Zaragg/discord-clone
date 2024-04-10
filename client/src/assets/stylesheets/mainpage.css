@@ -232,6 +232,7 @@ body {
   padding-bottom: 5px;
   margin-top: 3px;
   margin-bottom: 3px;
+  position: relative;
 }
 
 .message:hover {
@@ -242,6 +243,33 @@ body {
   flex-direction: row;
   margin-left: 10px;
   align-items: center;
+}
+
+.message-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 15px;
+  background-color: var(--primaryDark300);
+  border-radius: 5px;
+}
+
+.message-menu-button {
+  display: inline;
+  cursor: pointer;
+  height: 24px;
+}
+
+.message-menu-button:hover {
+  background-color: var(--primaryDark400);
+}
+
+.message .message-menu {
+  visibility: hidden;
+}
+
+.message:hover .message-menu {
+  visibility: visible;
 }
 .username {
   color: white;
