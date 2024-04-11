@@ -255,9 +255,9 @@ body {
 }
 
 .message-menu-button {
-  display: inline;
+  display: inline-block;
   cursor: pointer;
-  height: 24px;
+  height: 100%;
 }
 
 .message-menu-button:hover {
@@ -308,6 +308,15 @@ body {
   justify-content: center;
 }
 
+.message-box-editing {
+  display: flex;
+  flex-direction: row;
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
+  justify-content: center;
+  min-width: 600px;
+}
 .message-input {
   display: flex;
   align-items: center;
@@ -319,11 +328,25 @@ body {
   border-radius: 7px;
   padding: 10px;
 }
+.message-box-editing form {
+  width: 100%;
+}
 .message-box form {
   width: 100%;
 }
 
 .message-box input {
+  border: none;
+  color: var(--textDark200);
+  outline: none;
+  font-size: 1.1rem;
+  box-sizing: border-box;
+  width: 90%;
+  background-color: #383a40;
+  margin-left: 10px;
+}
+
+.message-box-editing input {
   border: none;
   color: var(--textDark200);
   outline: none;

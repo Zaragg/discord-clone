@@ -28,6 +28,17 @@ export default function Message({ messageID, userID, time, text }) {
     setEditing(false);
   }
 
+  async function handleDelete(e) {
+    const response = await fetch(`http://localhost:5000/api/message/delete`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ messageID: messageID }),
+    }).then((resp) => resp.json());
+  }
+
   const { data: userInfo, isLoading } = useQuery({
     queryKey: ["user", userID],
     queryFn: () => fetchUserData(userID),
@@ -41,7 +52,7 @@ export default function Message({ messageID, userID, time, text }) {
           <div className="message-menu-button" onClick={() => setEditing(true)}>
             <box-icon name="edit-alt" type="solid" color="#ffffff"></box-icon>
           </div>
-          <div className="message-menu-button">
+          <div className="message-menu-button" onClick={() => handleDelete()}>
             <box-icon name="trash" type="solid" color="#ff0000"></box-icon>
           </div>
         </div>
@@ -56,7 +67,7 @@ export default function Message({ messageID, userID, time, text }) {
           <div className="time"> {time}</div>
         </div>
         {editing ? (
-          <div className="message-box">
+          <div className="message-box-editing">
             <div className="message-input">
               <form
                 onSubmit={handleEdit}

@@ -122,6 +122,24 @@ router.post("/message/update", async (req, res) => {
   else res.send(updateMessage).status(200);
 });
 
+router.post("/message/delete", async (req, res) => {
+  let collection = await db.collection("message");
+  let messageID = req.body.messageID;
+  try {
+    const deleteMessage = await collection.deleteOne({
+      _id: new ObjectId(messageID),
+    });
+
+    io.emit("newMessage", deleteMessage);
+    return res.status(201).json({
+      count: deleteMessage.deletedCount,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({ message: "Not found" }).status(404);
+  }
+});
+
 router.get("/user/:id", async (req, res) => {
   let collection = await db.collection("users");
   let query = { _id: new ObjectId(req.params.id) };
